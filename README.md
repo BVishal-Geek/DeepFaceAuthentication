@@ -39,6 +39,9 @@ mfa-face-recognition/
 │── 📂 tests/                  # Unit tests
 │    ├── test_face_auth.py     # Test face authentication
 │
+│── 📂 experiments/            # Experiment base code within .py or .ipynb files
+│    ├── experimentation.ipynb # ipynb file to test code working
+│
 │── 📂 docs/                   # Documentation
 │    ├── README.md             # Project overview
 │    ├── API_DOCS.md           # API documentation
