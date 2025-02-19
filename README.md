@@ -16,40 +16,39 @@ DeepFaceAuthentication is a multi-factor authentication (MFA) system that enhanc
 
 ```bash
 mfa-face-recognition/
-│── 📂 backend/                # Backend logic
-│    ├── 📂 models/            # Trained ML models (face recognition, liveness)
-│    ├── 📂 services/          # Business logic (facial auth, token verification)
-│    ├── 📂 database/          # Database models & queries (PostgreSQL/MongoDB)
-│    ├── 📂 utils/             # Helper functions (logging, encryption)
-│    ├── main.py               # Entry point for Streamlit UI
-│
-│── 📂 models/                 # Machine Learning models
-│    ├── face_recognition.py   # Facial recognition logic
-│    ├── liveness_detection.py # Anti-spoofing model
-│    ├── train_model.py        # Model training script
-│
-│── 📂 scripts/                # Utility scripts
-│    ├── preprocess_data.py    # Preprocess dataset for training
-│    ├── test_face_recog.py    # Script to test facial recognition
-│
-│── 📂 config/                 # Configuration settings
-│    ├── settings.py           # Environment variables, API keys
-│    ├── database.py           # Database connection
+│── 📂 mfa_face_recognition/   # Package directory (must have __init__.py)
+│    ├── 📂 services/          # Facial authentication logic
+│    │    ├── face_auth.py     # Verifies user identity
+│    │    ├── liveness_check.py # (Optional) Detects spoofing
+│    │    ├── token_manager.py # MFA token management
+│    │
+│    ├── 📂 database/          # Database logic
+│    │    ├── db.py            # Database connection
+│    │    ├── user_data.py     # Store, retrieve, and delete user embeddings
+│    │
+│    ├── 📂 utils/             # Helper functions
+│    │    ├── image_processing.py # Preprocesses images
+│    │    ├── logging_handler.py  # Custom logging
+│    │    ├── encryption.py       # Encrypt embeddings
+│    │
+│    ├── 📂 models/            # Pretrained models
+│    │    ├── face_model.onnx  
+│    │    ├── liveness_model.onnx 
+│    │
+│    ├── 📂 scripts/           # Utility scripts
+│    │    ├── capture_image.py      # Opens camera
+│    │    ├── enroll_user.py        # Enrolls user
+│    │    ├── redo_enrollment.py    # Deletes old data and re-enrolls user
+│    │
+│    ├── __init__.py           # Marks this as a Python package
+│    ├── main.py               # API entry point (FastAPI/Flask)
 │
 │── 📂 tests/                  # Unit tests
-│    ├── test_face_auth.py     # Test face authentication
-│
-│── 📂 experiments/            # Experiment base code within .py or .ipynb files
-│    ├── experimentation.ipynb # ipynb file to test code working
-│
-│── 📂 docs/                   # Documentation
-│    ├── README.md             # Project overview
-│    ├── API_DOCS.md           # API documentation
-│
-│── Dockerfile                 # Containerization setup
-│── requirements.txt            # Python dependencies
+│── setup.py                   # Packaging file for pip installation
+│── pyproject.toml              # Alternative packaging method (modern way)
+│── requirements.txt            # Dependencies list
+│── README.md                   # Documentation
 │── .gitignore                  # Ignore unnecessary files
-│── README.md                   # Project description
 ```
 
 ---
