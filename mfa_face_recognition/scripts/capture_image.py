@@ -24,7 +24,7 @@ class CaptureImage:
             if cv.waitKey(1) & 0xFF == ord('q'):
                 break
         cap.release()
-        cv.destroyAllWindows()
+        cv.destroyAllWindows() 
 
 if __name__ == "__main__":
     capture_image = CaptureImage(camera_index=0, output_folder='output', image_name='captured_image.jpg')

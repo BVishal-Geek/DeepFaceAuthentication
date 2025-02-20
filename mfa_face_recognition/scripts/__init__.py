@@ -1,0 +1,1 @@
+from .capture_image import CaptureImage
