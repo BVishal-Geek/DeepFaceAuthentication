@@ -1,31 +1,21 @@
-import os
-import sys
-import time
-import cv2 as cv
+from PIL import Image
+import numpy as np
+import cv2
+import streamlit as st
 
 class CaptureImage:
-    def __init__(self, camera_index=0, output_folder=None, image_name=None):
-        self.camera_index = camera_index
-        self.output_folder = output_folder
-        self.image_name = image_name
+    '''live_stream method captures an image using Streamlit's built-in camera capture.'''
+    @staticmethod
+    def live_stream(disabled=None):
+        st.title("Capture Image")
 
-    def capture(self): 
-        cap = cv.VideoCapture(self.camera_index)
-        if not cap.isOpened():
-            print("Error: Could not open camera.")
-            exit()
-        
-        while True: 
-            ret, frame = cap.read()
-            if not ret:
-                print("Error: Could not read frame.")
-            cv.imshow('frame', frame)
-
-            if cv.waitKey(1) & 0xFF == ord('q'):
-                break
-        cap.release()
-        cv.destroyAllWindows() 
-
-if __name__ == "__main__":
-    capture_image = CaptureImage(camera_index=0, output_folder='output', image_name='captured_image.jpg')
-    capture_image.capture()
+        # Streamlit's built-in camera capture
+        captured_image = st.camera_input("Take a picture", disabled=disabled)
+        if captured_image:
+            # Convert Streamlit image to OpenCV format
+            image = Image.open(captured_image)
+            image = np.array(image)
+            image = cv2.cvtColor(image, cv2.COLOR_RGB2BGR)
+            return image
+        return None
+    
